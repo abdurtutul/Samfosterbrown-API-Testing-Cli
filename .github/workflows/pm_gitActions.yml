@@ -1,44 +1,20 @@
 name: Automated API tests using Postman CLI
 
 on: 
-  workflow_dispatch:
-  push:
-
+ workflow_dispatch:
+ push:
 jobs:
   automated-api-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
-
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-
       - name: Run API tests
         run: |
-          set +e
-          postman collection run "22742638-7b3a5b9a-15a3-4b79-a850-ee18ff361f9d" --integration-id "ci-test" > result.log 2>&1
-          exit_code=$?
-          echo "Exit code: $exit_code"
-
-          # Exit codes from Postman CLI:
-          # 0 = all tests passed
-          # 1 = some tests failed
-          # 2 = collection not found / error
-
-          if [ $exit_code -eq 0 ]; then
-            echo "✅ All tests passed."
-          elif [ $exit_code -eq 1 ]; then
-            echo "⚠️ Some tests failed. Acceptable up to 2."
-            # NOTE: Postman CLI does not give exact failure count.
-            # You can allow this run by not exiting with error.
-          else
-            echo "❌ Error running Postman CLI (exit code $exit_code)."
-            exit 1
-          fi
-
-      - name: Logout
-        run: postman logout
+          postman collection run "22742638-7b3a5b9a-15a3-4b79-a850-ee18ff361f9d"
+      - name: logout
+        run: postman logout ${{ secrets.POSTMAN_API_KEY }}
