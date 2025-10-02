@@ -53,6 +53,10 @@ The report includes:
 
 > 📁 The HTML report file is available in this repository under `samfosterbron-report.html`.
 
+**Report Preview:**  
+<img src="Screenshot_1.png" alt="Newman Report Screenshot" width="400px">
+
+
 ---
 
 ## 🎨 Figma Reference
