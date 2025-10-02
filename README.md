@@ -51,7 +51,7 @@ The report includes:
 - Assertion details  
 - Response time stats  
 
-> 📁 The HTML report file is available in this repository under `/reports/newman/`.
+> 📁 The HTML report file is available in this repository under `samfosterbron-report.html`.
 
 ---
 
